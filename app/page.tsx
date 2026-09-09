@@ -113,35 +113,39 @@ export default function Home() {
         .liveClock {
           position: absolute;
           z-index: 30;
-
-          /* Görseldeki eski kutunun tamamını kapatır */
-          top: 1.55%;
-          right: 1.45%;
-          width: 15.7%;
-          height: 8.75%;
-
+          top: 16px;
+          right: 24px;
+          width: 218px;
+          height: 66px;
+          padding: 10px 14px;
           display: flex;
           align-items: center;
-          gap: 4.2%;
-
-          padding: 1.0% 1.15%;
+          gap: 11px;
           border-radius: 14px;
-
-          background: #0a1b31;
-          border: 1px solid rgba(255,255,255,.16);
-          box-shadow: 0 8px 24px rgba(0,0,0,.28);
-          color: white;
+          background: rgba(8, 24, 44, 0.94);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+          color: #fff;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
         }
 
         .calendarIcon {
-          flex: 0 0 18%;
-          aspect-ratio: 1;
+          flex: 0 0 34px;
+          width: 34px;
+          height: 34px;
           border-radius: 9px;
-          display: grid;
-          place-items: center;
-          padding: 12%;
-          color: #d8d4ff;
-          background: #172a48;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #c8c3ff;
+          background: rgba(88, 80, 190, 0.28);
+        }
+
+        .calendarIcon svg {
+          width: 22px;
+          height: 22px;
+          display: block;
         }
 
         .clockText {
@@ -150,25 +154,28 @@ export default function Home() {
         }
 
         .dateLine {
-          font-size: clamp(9px, 1.02vw, 17px);
+          font-size: 15px;
           line-height: 1.1;
           font-weight: 800;
           white-space: nowrap;
+          letter-spacing: 0.1px;
         }
 
         .subLine {
-          margin-top: 6%;
+          margin-top: 6px;
           display: flex;
-          gap: 5%;
           align-items: center;
+          gap: 6px;
           white-space: nowrap;
-          font-size: clamp(7px, .73vw, 12px);
+          font-size: 10.5px;
           line-height: 1;
           font-weight: 600;
-          opacity: .94;
+          opacity: 0.92;
         }
 
-        .sep { opacity: .6; }
+        .sep {
+          opacity: 0.55;
+        }
 
         .hotspot {
           position: absolute;
@@ -206,8 +213,35 @@ export default function Home() {
           }
 
           .liveClock {
+            top: 10px;
+            right: 10px;
+            width: 178px;
+            height: 54px;
+            padding: 8px 10px;
+            gap: 8px;
+            border-radius: 11px;
+          }
+
+          .calendarIcon {
+            flex-basis: 28px;
+            width: 28px;
+            height: 28px;
             border-radius: 7px;
-            border-width: .5px;
+          }
+
+          .calendarIcon svg {
+            width: 18px;
+            height: 18px;
+          }
+
+          .dateLine {
+            font-size: 12px;
+          }
+
+          .subLine {
+            margin-top: 4px;
+            gap: 4px;
+            font-size: 8.5px;
           }
         }
       `}</style>
