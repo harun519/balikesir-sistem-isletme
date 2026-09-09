@@ -1,6 +1,19 @@
 "use client";
 
-const apps = [
+import type { ReactNode } from "react";
+
+type AppItem = {
+  key: string;
+  title: string;
+  version: string;
+  description: string;
+  href: string;
+  tone: "blue" | "green" | "purple" | "orange";
+  disabled?: boolean;
+  icon: ReactNode;
+};
+
+const apps: AppItem[] = [
   {
     key: "trafo",
     title: "Trafo Değişimi",
@@ -56,7 +69,7 @@ const apps = [
       </svg>
     ),
   },
-] as const;
+];
 
 export default function Home() {
   return (
