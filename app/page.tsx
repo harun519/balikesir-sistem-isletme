@@ -52,23 +52,20 @@ export default function Home() {
         }
 
         .portal {
-          width: 100%;
+          width: 100vw;
+          height: 100dvh;
           min-height: 100dvh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 18px;
-          background:
-            radial-gradient(circle at 50% 10%, #12375d 0%, #0a1c31 38%, #071426 72%);
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background: #071426;
         }
 
         .frame {
           position: relative;
-          width: min(88vw, 1480px);
-          aspect-ratio: 1664 / 928;
-          border-radius: 18px;
+          width: 100vw;
+          height: 100dvh;
           overflow: hidden;
-          box-shadow: 0 28px 70px rgba(0, 0, 0, .38);
           background: #071426;
         }
 
@@ -78,7 +75,8 @@ export default function Home() {
           width: 100%;
           height: 100%;
           display: block;
-          object-fit: fill;
+          object-fit: cover;
+          object-position: center;
           user-select: none;
           -webkit-user-drag: none;
         }
@@ -116,38 +114,34 @@ export default function Home() {
 
         @media (max-width: 1100px) {
           :global(body) {
-            overflow: auto;
+            overflow: hidden;
           }
 
-          .portal {
-            align-items: flex-start;
-            min-height: 100dvh;
-            padding: 10px;
-          }
-
+          .portal,
           .frame {
-            width: 96vw;
-            border-radius: 14px;
+            width: 100vw;
+            height: 100dvh;
           }
         }
 
         @media (orientation: portrait) and (max-width: 700px) {
           :global(body) {
-            overflow-x: auto;
+            overflow: auto;
           }
 
           .portal {
-            justify-content: flex-start;
-            width: max-content;
-            min-width: 100%;
+            width: 100vw;
+            min-height: 100dvh;
+            overflow: auto;
           }
 
           .frame {
-            width: 980px;
-            min-width: 980px;
-            border-radius: 0;
+            width: 100vw;
+            height: 100dvh;
+            min-width: 100vw;
           }
         }
+
       `}</style>
     </main>
   );
