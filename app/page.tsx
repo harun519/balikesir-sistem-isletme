@@ -51,21 +51,6 @@ const tone: Record<string, {
   },
 };
 
-function DiamondLogo() {
-  return (
-    <div className="grid grid-cols-3 gap-1">
-      {[0,1,2,3,4,5,6,7,8].map((n) => (
-        <span
-          key={n}
-          className={`h-2.5 w-2.5 rotate-45 rounded-[2px] bg-white ${
-            [0,2,6,8].includes(n) ? "opacity-70" : ""
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function Home() {
   const [now, setNow] = useState<Date | null>(null);
 
@@ -93,30 +78,21 @@ export default function Home() {
         hour: "2-digit",
         minute: "2-digit",
       }).format(now)
-    : "09:53";
+    : "09:59";
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 font-sans text-white">
+      {/* GERÇEK BALIKESİR FOTOĞRAFI */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/balikesir-bg.png')" }}
       />
-      <div className="fixed inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,.10),rgba(15,23,42,.20)_35%,rgba(15,23,42,.35)_100%)]" />
-      <div className="fixed inset-0 backdrop-blur-[1px]" />
+      <div className="fixed inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,.08),rgba(15,23,42,.18)_35%,rgba(15,23,42,.32)_100%)]" />
 
       <div className="relative z-10 flex min-h-screen flex-col">
-        <header className="mx-auto flex w-full max-w-[1540px] items-start justify-between px-6 pt-7 sm:px-10 lg:px-12">
-          <div className="flex items-center gap-4">
-            <DiamondLogo />
-            <div>
-              <div className="text-2xl font-black tracking-[.08em] drop-shadow sm:text-3xl">UEDAŞ</div>
-              <div className="mt-1 text-xs font-extrabold tracking-[.18em] text-white/90 sm:text-sm">
-                SİSTEM İŞLETME
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/20 bg-black/45 px-5 py-3 shadow-2xl backdrop-blur-xl">
+        {/* SAĞ ÜST TARİH / SAAT */}
+        <header className="mx-auto flex w-full max-w-[1540px] justify-end px-6 pt-5 sm:px-10 lg:px-12">
+          <div className="rounded-2xl border border-white/20 bg-black/48 px-5 py-3 shadow-2xl backdrop-blur-xl">
             <div className="flex items-center gap-3">
               <div className="text-2xl">📅</div>
               <div>
@@ -129,27 +105,29 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="mx-auto flex w-full max-w-[1120px] flex-1 flex-col justify-center px-5 pb-8 pt-6 sm:px-8">
-          <div className="mb-7 text-center">
-            <h1 className="text-3xl font-black tracking-[.025em] drop-shadow-[0_3px_6px_rgba(0,0,0,.35)] sm:text-4xl lg:text-5xl">
+        <section className="mx-auto flex w-full max-w-[1120px] flex-1 flex-col justify-center px-5 pb-6 pt-3 sm:px-8">
+          {/* BAŞLIK */}
+          <div className="mb-6 text-center">
+            <h1 className="text-3xl font-black tracking-[.025em] drop-shadow-[0_3px_7px_rgba(0,0,0,.55)] sm:text-4xl lg:text-5xl">
               BALIKESİR SİSTEM İŞLETME
             </h1>
-            <p className="mt-2 text-sm font-medium text-white/85 drop-shadow sm:text-base">
+            <p className="mt-2 text-sm font-medium text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,.55)] sm:text-base">
               Daha güvenli, daha kesintisiz bir enerji için...
             </p>
           </div>
 
+          {/* 3 UYGULAMA KARTI */}
           <div className="grid gap-5 md:grid-cols-3">
             {apps.map((app) => (
               <article
                 key={app.title}
-                className="rounded-[22px] border border-white/20 bg-[linear-gradient(180deg,rgba(30,30,35,.66),rgba(18,18,22,.74))] p-5 shadow-[0_18px_50px_rgba(0,0,0,.28)] backdrop-blur-[14px]"
+                className="rounded-[22px] border border-white/20 bg-[linear-gradient(180deg,rgba(35,35,40,.62),rgba(18,18,22,.72))] p-5 shadow-[0_18px_50px_rgba(0,0,0,.34)] backdrop-blur-[13px]"
               >
                 <div className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br text-3xl font-black shadow-xl ${tone[app.tone].icon}`}>
                   {app.icon}
                 </div>
 
-                <h2 className="mt-4 text-center text-xl font-black">{app.title}</h2>
+                <h2 className="mt-4 text-center text-xl font-black drop-shadow">{app.title}</h2>
 
                 <div className="mt-3 flex justify-center">
                   <span className={`rounded-full px-4 py-1.5 text-sm font-black shadow ${tone[app.tone].badge}`}>
@@ -157,7 +135,7 @@ export default function Home() {
                   </span>
                 </div>
 
-                <p className="mt-4 min-h-14 whitespace-pre-line text-center text-sm font-semibold leading-6 text-white/90">
+                <p className="mt-4 min-h-14 whitespace-pre-line text-center text-sm font-semibold leading-6 text-white/92">
                   {app.desc}
                 </p>
 
@@ -172,18 +150,19 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-5 grid gap-5 md:grid-cols-[1fr_1.15fr_1fr]">
-            <section className="rounded-[20px] border border-white/15 bg-black/55 p-5 shadow-xl backdrop-blur-xl">
+          {/* ALTTA SADECE 2 PANEL */}
+          <div className="mx-auto mt-5 grid w-full max-w-[760px] gap-5 md:grid-cols-2">
+            <section className="rounded-[20px] border border-white/15 bg-black/58 p-5 shadow-xl backdrop-blur-xl">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-2xl font-black shadow">✓</div>
                 <div>
                   <div className="text-lg font-black">3 Uygulama Aktif</div>
-                  <div className="mt-1 text-xs text-white/70">Tüm sistemler hazır durumda</div>
+                  <div className="mt-1 text-xs text-white/72">Tüm sistemler hazır durumda</div>
                 </div>
               </div>
             </section>
 
-            <section className="rounded-[20px] border border-white/15 bg-black/55 p-5 shadow-xl backdrop-blur-xl">
+            <section className="rounded-[20px] border border-white/15 bg-black/58 p-5 shadow-xl backdrop-blur-xl">
               <h3 className="flex items-center gap-2 text-base font-black">
                 <span>◷</span> Son Güncellemeler
               </h3>
@@ -191,44 +170,31 @@ export default function Home() {
                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3">
                   <span className="font-bold">Trafo Değişimi</span>
                   <span className="rounded-md bg-blue-600 px-2 py-1 font-black">v10.0</span>
-                  <span className="text-white/70">09.09.2026</span>
+                  <span className="text-white/72">09.09.2026</span>
                 </div>
                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3">
                   <span className="font-bold">SCADA Saha Kontrol</span>
                   <span className="rounded-md bg-emerald-600 px-2 py-1 font-black">v7.7.3</span>
-                  <span className="text-white/70">09.09.2026</span>
+                  <span className="text-white/72">09.09.2026</span>
                 </div>
                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3">
                   <span className="font-bold">Görüntülü Teyit</span>
                   <span className="rounded-md bg-violet-600 px-2 py-1 font-black">v125</span>
-                  <span className="text-white/70">09.09.2026</span>
+                  <span className="text-white/72">09.09.2026</span>
                 </div>
-              </div>
-            </section>
-
-            <section className="rounded-[20px] border border-white/15 bg-black/55 p-5 shadow-xl backdrop-blur-xl">
-              <h3 className="flex items-center gap-2 text-base font-black">
-                <span>▣</span> Dokümanlar
-              </h3>
-              <div className="mt-4 space-y-2 text-xs">
-                <button className="flex w-full items-center justify-between rounded-lg px-1 py-2 text-left font-bold text-white/90 hover:bg-white/5">
-                  <span>▧ &nbsp; Kullanım Kılavuzu</span><span>→</span>
-                </button>
-                <button className="flex w-full items-center justify-between rounded-lg px-1 py-2 text-left font-bold text-white/90 hover:bg-white/5">
-                  <span>▧ &nbsp; Duyurular</span><span>→</span>
-                </button>
               </div>
             </section>
           </div>
         </section>
 
+        {/* ALT ŞERİT */}
         <footer className="border-t border-white/10 bg-black/55 px-7 py-4 text-xs backdrop-blur-xl">
           <div className="mx-auto flex max-w-[1500px] flex-col justify-between gap-2 sm:flex-row">
-            <div className="font-bold">
-              UEDAŞ <span className="mx-2 text-white/50">|</span> Balıkesir Sistem İşletme Portalı
-            </div>
-            <div className="text-white/80">
-              Güvenli <span className="mx-2">|</span> Sürdürülebilir <span className="mx-2">|</span> Kesintisiz Enerji
+            <div className="font-bold">Balıkesir Sistem İşletme Portalı</div>
+            <div className="text-white/82">
+              Güvenli <span className="mx-2">|</span>
+              Sürdürülebilir <span className="mx-2">|</span>
+              Kesintisiz Enerji
             </div>
           </div>
         </footer>
