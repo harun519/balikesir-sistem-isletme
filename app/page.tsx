@@ -15,6 +15,7 @@ export default function Home() {
         <a className="hotspot scada" href="https://scada-saha-kontrol-vercel.vercel.app" aria-label="SCADA Saha Kontrol uygulamasına git" />
         <a className="hotspot teyit" href="https://goruntulu-teyit-v1.vercel.app" aria-label="Görüntülü Teyit uygulamasına git" />
         <div className="hotspot bakim disabled" aria-label="3. Seviye Bakım yakında" />
+        <div className="desktopVersionMask updatesVersionMask" aria-hidden="true" />
       </div>
 
       {/* TELEFON: ayrı mobil arayüz */}
@@ -152,6 +153,33 @@ export default function Home() {
         .scada { left: 24.6%; width: 19.2%; }
         .teyit { left: 45.1%; width: 19%; }
         .bakim { left: 65.5%; width: 19.2%; cursor: default; }
+
+        /* Sürüm bilgileri görselin içine gömülü olduğu için kart renginde kapatılır. */
+        .hotspot::after {
+          content: "";
+          position: absolute;
+          z-index: 2;
+          left: 31%;
+          top: 39%;
+          width: 38%;
+          height: 12%;
+          border-radius: 14px;
+          background: #172435;
+          pointer-events: none;
+        }
+        .desktopVersionMask {
+          position: absolute;
+          z-index: 4;
+          pointer-events: none;
+          background: #17283a;
+        }
+        .updatesVersionMask {
+          left: 59.5%;
+          top: 78.3%;
+          width: 8.7%;
+          height: 13.5%;
+          border-radius: 5px;
+        }
 
         .mobilePage { display: none; }
 
