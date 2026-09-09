@@ -77,21 +77,6 @@ export default function Home() {
             </article>
           </section>
 
-          <section className="mobileStatus">
-            <div className="statusCheck">✓</div>
-            <div>
-              <strong>3 Uygulama Aktif</strong>
-              <span>Tüm sistemler hazır durumda</span>
-            </div>
-          </section>
-
-          <section className="mobileUpdates">
-            <h3>◷ &nbsp;Son Güncellemeler</h3>
-            <div><b>Trafo Değişimi</b><time>09.09.2026</time></div>
-            <div><b>SCADA Saha Kontrol</b><time>09.09.2026</time></div>
-            <div><b>Görüntülü Teyit</b><time>09.09.2026</time></div>
-          </section>
-
           <footer>Balıkesir Sistem İşletme Portalı</footer>
         </div>
       </div>
