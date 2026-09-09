@@ -167,7 +167,7 @@ export default function Home() {
         }
         .cardVersionMask {
           top: 48.25%;
-          width: 7.2%;
+          width: 7.6%;
           height: 5.2%;
           border-radius: 14px;
           background: #172435;
