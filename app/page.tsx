@@ -7,19 +7,14 @@ export default function Home() {
       <div className="desktopFrame">
         <img
           className="portalImage"
-          src="/portal-final-kompakt.png"
+          src="/portal-final-kompakt-clean.png"
           alt="Balıkesir Sistem İşletme Portalı"
         />
-        <div className="bottomCleanMask" aria-hidden="true" />
 
         <a className="hotspot trafo" href="https://balikesir-trafo-degisimi.vercel.app" aria-label="Trafo Değişimi uygulamasına git" />
         <a className="hotspot scada" href="https://scada-saha-kontrol-vercel.vercel.app" aria-label="SCADA Saha Kontrol uygulamasına git" />
         <a className="hotspot teyit" href="https://goruntulu-teyit-v1.vercel.app" aria-label="Görüntülü Teyit uygulamasına git" />
         <div className="hotspot bakim disabled" aria-label="3. Seviye Bakım yakında" />
-        <div className="desktopVersionMask cardVersionMask versionMask1" aria-hidden="true" />
-        <div className="desktopVersionMask cardVersionMask versionMask2" aria-hidden="true" />
-        <div className="desktopVersionMask cardVersionMask versionMask3" aria-hidden="true" />
-        <div className="desktopVersionMask cardVersionMask versionMask4" aria-hidden="true" />
       </div>
 
       {/* TELEFON: ayrı mobil arayüz */}
@@ -121,16 +116,6 @@ export default function Home() {
           user-select: none;
           -webkit-user-drag: none;
         }
-        .bottomCleanMask {
-          position: absolute;
-          z-index: 4;
-          left: 0;
-          right: 0;
-          top: 71.5%;
-          bottom: 0;
-          background: linear-gradient(180deg, #071426 0%, #071426 100%);
-          pointer-events: none;
-        }
         .hotspot {
           position: absolute;
           z-index: 5;
@@ -152,25 +137,6 @@ export default function Home() {
         .scada { left: 24.6%; width: 19.2%; }
         .teyit { left: 45.1%; width: 19%; }
         .bakim { left: 65.5%; width: 19.2%; cursor: default; }
-
-        /* Sürüm bilgileri görselin içine gömülü olduğu için kart renginde kapatılır. */
-        .desktopVersionMask {
-          position: absolute;
-          z-index: 4;
-          pointer-events: none;
-          background: #17283a;
-        }
-        .cardVersionMask {
-          top: 48.25%;
-          width: 7.6%;
-          height: 5.2%;
-          border-radius: 14px;
-          background: #172435;
-        }
-        .versionMask1 { left: 10.2%; }
-        .versionMask2 { left: 33.4%; }
-        .versionMask3 { left: 57.2%; }
-        .versionMask4 { left: 80.8%; }
 
         .mobilePage { display: none; }
 
