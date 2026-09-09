@@ -137,19 +137,40 @@ export default function Home() {
         }
 
         @media (orientation: portrait) and (max-width: 700px) {
+          :global(html),
           :global(body) {
-            overflow-x: auto;
+            width: 100%;
+            min-width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            background: #071426;
           }
 
           .portal {
-            width: max-content;
-            min-width: 100%;
+            width: 100vw;
+            min-height: 100dvh;
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #071426;
           }
 
           .frame {
-            width: 1000px;
-            min-width: 1000px;
+            position: relative;
+            width: 100vw;
+            height: auto;
             aspect-ratio: 1713 / 918;
+            min-width: 0;
+            overflow: hidden;
+          }
+
+          .portalImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
           }
         }
       `}</style>
