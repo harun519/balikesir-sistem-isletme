@@ -10,6 +10,7 @@ export default function Home() {
           src="/portal-final-kompakt.png"
           alt="Balıkesir Sistem İşletme Portalı"
         />
+        <div className="bottomCleanMask" aria-hidden="true" />
 
         <a className="hotspot trafo" href="https://balikesir-trafo-degisimi.vercel.app" aria-label="Trafo Değişimi uygulamasına git" />
         <a className="hotspot scada" href="https://scada-saha-kontrol-vercel.vercel.app" aria-label="SCADA Saha Kontrol uygulamasına git" />
@@ -135,6 +136,16 @@ export default function Home() {
           object-position: center;
           user-select: none;
           -webkit-user-drag: none;
+        }
+        .bottomCleanMask {
+          position: absolute;
+          z-index: 4;
+          left: 0;
+          right: 0;
+          top: 73%;
+          bottom: 0;
+          background: linear-gradient(180deg, #071426 0%, #071426 100%);
+          pointer-events: none;
         }
         .hotspot {
           position: absolute;
