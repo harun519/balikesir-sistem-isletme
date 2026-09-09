@@ -89,12 +89,16 @@ export default function Home() {
           background: transparent;
           text-decoration: none;
           cursor: pointer;
-          transition: background .16s ease, box-shadow .16s ease;
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
         }
 
-        .hotspot:hover {
-          background: rgba(255, 255, 255, .025);
-          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .11);
+        .hotspot:hover,
+        .hotspot:focus,
+        .hotspot:active {
+          background: transparent;
+          box-shadow: none;
+          outline: none;
         }
 
         .trafo { left: 4.0%; width: 19.5%; }
