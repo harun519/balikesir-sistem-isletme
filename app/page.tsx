@@ -1,6 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+function formatClock(date: Date) {
+  return {
+    dateText: new Intl.DateTimeFormat("tr-TR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(date),
+    dayText: new Intl.DateTimeFormat("tr-TR", {
+      weekday: "long",
+    }).format(date),
+    timeText: new Intl.DateTimeFormat("tr-TR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).format(date),
+  };
+}
+
 export default function Home() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const update = () => setNow(new Date());
+    update();
+    const timer = window.setInterval(update, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const clock = now ? formatClock(now) : null;
+
   return (
     <main className="portal">
       <div className="stage">
@@ -10,7 +42,20 @@ export default function Home() {
           alt="Balıkesir Sistem İşletme Portalı"
         />
 
-        {/* Görselin üzerindeki kartlara denk gelen şeffaf tıklama alanları */}
+        {/* Canlı tarih / saat - görseldeki sabit alanın üstünü tamamen kapatır */}
+        <div className="liveClock" aria-label="Canlı tarih ve saat">
+          <div className="calendarIcon">▦</div>
+          <div className="clockText">
+            <div className="dateLine">{clock?.dateText ?? "09 Eylül 2026"}</div>
+            <div className="subLine">
+              <span>{clock?.dayText ?? "Çarşamba"}</span>
+              <span className="dot">•</span>
+              <span>{clock?.timeText ?? "--:--:--"}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Görseldeki kartların üstüne denk gelen tıklama alanları */}
         <a
           className="hotspot trafo"
           href="https://balikesir-trafo-degisimi.vercel.app"
@@ -78,6 +123,66 @@ export default function Home() {
           -webkit-user-drag: none;
         }
 
+        .liveClock {
+          position: absolute;
+          z-index: 20;
+          top: 1.3%;
+          right: 3.3%;
+          width: 182px;
+          min-height: 64px;
+          padding: 10px 13px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-radius: 15px;
+          background: rgba(9, 24, 45, 0.94);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+          color: white;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .calendarIcon {
+          flex: 0 0 auto;
+          width: 30px;
+          height: 30px;
+          border-radius: 8px;
+          display: grid;
+          place-items: center;
+          font-size: 21px;
+          line-height: 1;
+          background: rgba(141, 119, 255, 0.18);
+          color: #d9d3ff;
+        }
+
+        .clockText {
+          min-width: 0;
+          flex: 1;
+        }
+
+        .dateLine {
+          font-size: 14px;
+          font-weight: 800;
+          line-height: 1.15;
+          white-space: nowrap;
+        }
+
+        .subLine {
+          margin-top: 5px;
+          font-size: 10px;
+          font-weight: 600;
+          opacity: 0.9;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          white-space: nowrap;
+        }
+
+        .dot {
+          opacity: 0.55;
+        }
+
         .hotspot {
           position: absolute;
           z-index: 5;
@@ -120,6 +225,29 @@ export default function Home() {
             height: auto;
             aspect-ratio: 16 / 9;
           }
+
+          .liveClock {
+            width: 150px;
+            min-height: 54px;
+            padding: 8px 10px;
+            border-radius: 12px;
+          }
+
+          .calendarIcon {
+            width: 26px;
+            height: 26px;
+            font-size: 17px;
+          }
+
+          .dateLine {
+            font-size: 11px;
+          }
+
+          .subLine {
+            margin-top: 3px;
+            font-size: 8px;
+            gap: 4px;
+          }
         }
 
         @media (orientation: portrait) and (max-width: 700px) {
@@ -135,6 +263,12 @@ export default function Home() {
             width: 1100px;
             min-width: 1100px;
             height: 619px;
+          }
+
+          .liveClock {
+            top: 8px;
+            right: 28px;
+            width: 165px;
           }
         }
       `}</style>
