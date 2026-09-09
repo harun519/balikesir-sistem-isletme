@@ -160,7 +160,7 @@ export default function Home() {
           position: absolute;
           z-index: 2;
           left: 31%;
-          top: 39%;
+          top: 45%;
           width: 38%;
           height: 12%;
           border-radius: 14px;
