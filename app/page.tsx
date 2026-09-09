@@ -101,7 +101,7 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-slate-950 font-sans text-white">
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/enerji-bg.svg')" }}
+        style={{ backgroundImage: "url('/enerji-portal-arka-plan.png')" }}
       />
       <div className="fixed inset-0 bg-[linear-gradient(180deg,rgba(2,8,23,.08),rgba(2,8,23,.22)_45%,rgba(2,8,23,.42)_100%)]" />
 
