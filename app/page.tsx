@@ -6,11 +6,10 @@ export default function Home() {
       <div className="frame">
         <img
           className="portalImage"
-          src="/portal-tarihsiz-kompakt.png"
+          src="/portal-final-kompakt.png"
           alt="Balıkesir Sistem İşletme Portalı"
         />
 
-        {/* Görseldeki kartların üstüne denk gelen şeffaf bağlantılar */}
         <a
           className="hotspot trafo"
           href="https://balikesir-trafo-degisimi.vercel.app"
@@ -41,6 +40,7 @@ export default function Home() {
         :global(html),
         :global(body) {
           margin: 0;
+          width: 100%;
           min-width: 320px;
           min-height: 100%;
           background: #071426;
@@ -54,11 +54,10 @@ export default function Home() {
         .portal {
           width: 100vw;
           height: 100dvh;
-          min-height: 100dvh;
           margin: 0;
           padding: 0;
-          overflow: hidden;
           background: #071426;
+          overflow: hidden;
         }
 
         .frame {
@@ -84,9 +83,9 @@ export default function Home() {
         .hotspot {
           position: absolute;
           z-index: 5;
-          top: 33.4%;
-          height: 43.0%;
-          border-radius: 20px;
+          top: 31.0%;
+          height: 38.5%;
+          border-radius: 18px;
           background: transparent;
           text-decoration: none;
           cursor: pointer;
@@ -95,13 +94,13 @@ export default function Home() {
 
         .hotspot:hover {
           background: rgba(255, 255, 255, .025);
-          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .12);
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .11);
         }
 
-        .trafo { left: 3.8%; width: 19.8%; }
-        .scada { left: 24.2%; width: 19.5%; }
-        .teyit { left: 44.4%; width: 19.5%; }
-        .bakim { left: 64.5%; width: 19.7%; }
+        .trafo { left: 4.0%; width: 19.5%; }
+        .scada { left: 24.6%; width: 19.2%; }
+        .teyit { left: 45.1%; width: 19.0%; }
+        .bakim { left: 65.5%; width: 19.2%; }
 
         .disabled {
           cursor: default;
@@ -112,36 +111,43 @@ export default function Home() {
           box-shadow: none;
         }
 
-        @media (max-width: 1100px) {
-          :global(body) {
-            overflow: hidden;
-          }
-
-          .portal,
-          .frame {
-            width: 100vw;
-            height: 100dvh;
-          }
-        }
-
-        @media (orientation: portrait) and (max-width: 700px) {
+        @media (max-width: 900px) {
           :global(body) {
             overflow: auto;
           }
 
           .portal {
-            width: 100vw;
             min-height: 100dvh;
-            overflow: auto;
+            height: auto;
           }
 
           .frame {
             width: 100vw;
-            height: 100dvh;
-            min-width: 100vw;
+            aspect-ratio: 1713 / 918;
+            height: auto;
+          }
+
+          .portalImage {
+            object-fit: fill;
           }
         }
 
+        @media (orientation: portrait) and (max-width: 700px) {
+          :global(body) {
+            overflow-x: auto;
+          }
+
+          .portal {
+            width: max-content;
+            min-width: 100%;
+          }
+
+          .frame {
+            width: 1000px;
+            min-width: 1000px;
+            aspect-ratio: 1713 / 918;
+          }
+        }
       `}</style>
     </main>
   );
