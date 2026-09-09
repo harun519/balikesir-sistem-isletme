@@ -7,7 +7,7 @@ export default function Home() {
       <div className="desktopFrame">
         <img
           className="portalImage"
-          src="/portal-final-kompakt-clean.png"
+          src="/portal-final-kompakt-clean.jpg"
           alt="Balıkesir Sistem İşletme Portalı"
         />
 
