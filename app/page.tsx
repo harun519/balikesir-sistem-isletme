@@ -42,7 +42,10 @@ export default function Home() {
           alt="Balıkesir Sistem İşletme Portalı"
         />
 
-        {/* Canlı tarih / saat - görseldeki sabit alanın üstünü tamamen kapatır */}
+        {/* PNG içindeki eski sabit tarih/saat alanını tamamen gizler */}
+        <div className="clockCover" aria-hidden="true" />
+
+        {/* Canlı tarih / saat */}
         <div className="liveClock" aria-label="Canlı tarih ve saat">
           <div className="calendarIcon">▦</div>
           <div className="clockText">
@@ -123,11 +126,27 @@ export default function Home() {
           -webkit-user-drag: none;
         }
 
+        .clockCover {
+          position: absolute;
+          z-index: 19;
+          top: 0;
+          right: 0;
+          width: 24%;
+          height: 13%;
+          background: linear-gradient(
+            180deg,
+            rgba(7, 20, 38, 0.96) 0%,
+            rgba(7, 20, 38, 0.92) 65%,
+            rgba(7, 20, 38, 0.00) 100%
+          );
+          pointer-events: none;
+        }
+
         .liveClock {
           position: absolute;
           z-index: 20;
-          top: 1.3%;
-          right: 3.3%;
+          top: 1.5%;
+          right: 3.0%;
           width: 182px;
           min-height: 64px;
           padding: 10px 13px;
@@ -226,6 +245,11 @@ export default function Home() {
             aspect-ratio: 16 / 9;
           }
 
+          .clockCover {
+            width: 30%;
+            height: 15%;
+          }
+
           .liveClock {
             width: 150px;
             min-height: 54px;
@@ -263,6 +287,11 @@ export default function Home() {
             width: 1100px;
             min-width: 1100px;
             height: 619px;
+          }
+
+          .clockCover {
+            width: 260px;
+            height: 86px;
           }
 
           .liveClock {
