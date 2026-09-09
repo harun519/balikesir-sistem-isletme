@@ -1,75 +1,42 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-
-function getClock(date: Date) {
-  return {
-    date: new Intl.DateTimeFormat("tr-TR", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }).format(date),
-    day: new Intl.DateTimeFormat("tr-TR", {
-      weekday: "long",
-    }).format(date),
-    time: new Intl.DateTimeFormat("tr-TR", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    }).format(date),
-  };
-}
-
 export default function Home() {
-  const [now, setNow] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const tick = () => setNow(new Date());
-    tick();
-    const id = window.setInterval(tick, 1000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const clock = useMemo(() => (now ? getClock(now) : null), [now]);
-
   return (
     <main className="portal">
       <div className="stage">
         <img
           className="portalImage"
-          src="/enerji-portal-final-v2.png"
+          src="/enerji-portal-tarihsiz-final.png"
           alt="Balıkesir Sistem İşletme Portalı"
         />
 
-        {/* PNG içindeki sabit tarih kutusunu TAM OLARAK örten canlı kutu */}
-        <div className="liveClock" aria-label="Canlı tarih ve saat">
-          <div className="calendarIcon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="100%" height="100%">
-              <rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.8"/>
-              <path d="M7 3v4M17 3v4M3 9h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              <path d="M7 13h2M11 13h2M15 13h2M7 17h2M11 17h2M15 17h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <div className="clockText">
-            <div className="dateLine">{clock?.date ?? "09 Eylül 2026"}</div>
-            <div className="subLine">
-              <span>{clock?.day ?? "Çarşamba"}</span>
-              <span className="sep">•</span>
-              <span>{clock?.time ?? "--:--:--"}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Kartların üstüne gelen görünmez bağlantılar */}
-        <a className="hotspot trafo" href="https://balikesir-trafo-degisimi.vercel.app" aria-label="Trafo Değişimi" />
-        <a className="hotspot scada" href="https://scada-saha-kontrol-vercel.vercel.app" aria-label="SCADA Saha Kontrol" />
-        <a className="hotspot teyit" href="https://goruntulu-teyit-v1.vercel.app" aria-label="Görüntülü Teyit" />
-        <div className="hotspot bakim disabled" title="Yakında Hizmetinizde" aria-label="3. Seviye Bakım yakında" />
+        {/* Kartların üstündeki görünmez bağlantılar */}
+        <a
+          className="hotspot trafo"
+          href="https://balikesir-trafo-degisimi.vercel.app"
+          aria-label="Trafo Değişimi uygulamasına git"
+        />
+        <a
+          className="hotspot scada"
+          href="https://scada-saha-kontrol-vercel.vercel.app"
+          aria-label="SCADA Saha Kontrol uygulamasına git"
+        />
+        <a
+          className="hotspot teyit"
+          href="https://goruntulu-teyit-v1.vercel.app"
+          aria-label="Görüntülü Teyit uygulamasına git"
+        />
+        <div
+          className="hotspot bakim disabled"
+          aria-label="3. Seviye Bakım yakında"
+          title="Yakında Hizmetinizde"
+        />
       </div>
 
       <style jsx>{`
-        :global(*) { box-sizing: border-box; }
+        :global(*) {
+          box-sizing: border-box;
+        }
 
         :global(html),
         :global(body) {
@@ -110,96 +77,36 @@ export default function Home() {
           -webkit-user-drag: none;
         }
 
-        .liveClock {
-          position: absolute;
-          z-index: 30;
-          top: 16px;
-          right: 24px;
-          width: 218px;
-          height: 66px;
-          padding: 10px 14px;
-          display: flex;
-          align-items: center;
-          gap: 11px;
-          border-radius: 14px;
-          background: rgba(8, 24, 44, 0.94);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-          color: #fff;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-
-        .calendarIcon {
-          flex: 0 0 34px;
-          width: 34px;
-          height: 34px;
-          border-radius: 9px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #c8c3ff;
-          background: rgba(88, 80, 190, 0.28);
-        }
-
-        .calendarIcon svg {
-          width: 22px;
-          height: 22px;
-          display: block;
-        }
-
-        .clockText {
-          min-width: 0;
-          flex: 1;
-        }
-
-        .dateLine {
-          font-size: 15px;
-          line-height: 1.1;
-          font-weight: 800;
-          white-space: nowrap;
-          letter-spacing: 0.1px;
-        }
-
-        .subLine {
-          margin-top: 6px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          white-space: nowrap;
-          font-size: 10.5px;
-          line-height: 1;
-          font-weight: 600;
-          opacity: 0.92;
-        }
-
-        .sep {
-          opacity: 0.55;
-        }
-
         .hotspot {
           position: absolute;
           z-index: 10;
-          top: 31.1%;
-          height: 38.9%;
+          top: 33.4%;
+          height: 43.0%;
           border-radius: 20px;
           background: transparent;
           text-decoration: none;
           cursor: pointer;
+          transition: background 0.15s ease, box-shadow 0.15s ease;
         }
 
         .hotspot:hover {
-          box-shadow: inset 0 0 0 2px rgba(255,255,255,.15);
-          background: rgba(255,255,255,.025);
+          background: rgba(255, 255, 255, 0.025);
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.13);
         }
 
-        .trafo { left: 9.2%; width: 18.7%; }
-        .scada { left: 28.6%; width: 18.5%; }
-        .teyit { left: 48.6%; width: 18.1%; }
-        .bakim { left: 67.1%; width: 18.2%; }
+        .trafo { left: 3.8%; width: 19.8%; }
+        .scada { left: 24.2%; width: 19.5%; }
+        .teyit { left: 44.4%; width: 19.5%; }
+        .bakim { left: 64.5%; width: 19.7%; }
 
-        .disabled { cursor: default; }
-        .disabled:hover { box-shadow: none; background: transparent; }
+        .disabled {
+          cursor: default;
+        }
+
+        .disabled:hover {
+          background: transparent;
+          box-shadow: none;
+        }
 
         @media (max-width: 700px) {
           .portal {
@@ -210,38 +117,6 @@ export default function Home() {
           .stage {
             width: 100vw;
             aspect-ratio: 1664 / 928;
-          }
-
-          .liveClock {
-            top: 10px;
-            right: 10px;
-            width: 178px;
-            height: 54px;
-            padding: 8px 10px;
-            gap: 8px;
-            border-radius: 11px;
-          }
-
-          .calendarIcon {
-            flex-basis: 28px;
-            width: 28px;
-            height: 28px;
-            border-radius: 7px;
-          }
-
-          .calendarIcon svg {
-            width: 18px;
-            height: 18px;
-          }
-
-          .dateLine {
-            font-size: 12px;
-          }
-
-          .subLine {
-            margin-top: 4px;
-            gap: 4px;
-            font-size: 8.5px;
           }
         }
       `}</style>
