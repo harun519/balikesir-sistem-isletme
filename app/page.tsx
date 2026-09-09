@@ -12,14 +12,14 @@ const apps = [
     icon:"📡", title:"SCADA Saha Kontrol",
     desc:"SCADA istasyonları saha kontrolleri, uygunsuzluklar ve raporlar.",
     version:"v7.5.1", status:"Aktif",
-    url:"#SCADA_URL",
+    url:"https://scada-saha-kontrol-vercel.vercel.app",
     tone:"green"
   },
   {
     icon:"🎥", title:"Görüntülü Teyit",
     desc:"Saha çalışmalarının görüntülü teyitleri, haftalık raporlar ve performans analizleri.",
     version:"v100", status:"Aktif",
-    url:"#GORUNTULU_TEYIT_URL",
+    url:"https://goruntulu-teyit-v1.vercel.app",
     tone:"violet"
   },
   {
