@@ -20,7 +20,6 @@ export default function Home() {
         <div className="desktopVersionMask cardVersionMask versionMask2" aria-hidden="true" />
         <div className="desktopVersionMask cardVersionMask versionMask3" aria-hidden="true" />
         <div className="desktopVersionMask cardVersionMask versionMask4" aria-hidden="true" />
-        <div className="desktopVersionMask updatesVersionMask" aria-hidden="true" />
       </div>
 
       {/* TELEFON: ayrı mobil arayüz */}
@@ -142,7 +141,7 @@ export default function Home() {
           z-index: 4;
           left: 0;
           right: 0;
-          top: 73%;
+          top: 71.5%;
           bottom: 0;
           background: linear-gradient(180deg, #071426 0%, #071426 100%);
           pointer-events: none;
@@ -187,13 +186,6 @@ export default function Home() {
         .versionMask2 { left: 33.4%; }
         .versionMask3 { left: 57.2%; }
         .versionMask4 { left: 80.8%; }
-        .updatesVersionMask {
-          left: 59.5%;
-          top: 78.3%;
-          width: 8.7%;
-          height: 13.5%;
-          border-radius: 5px;
-        }
 
         .mobilePage { display: none; }
 
