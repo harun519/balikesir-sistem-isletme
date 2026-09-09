@@ -1,5 +1,6 @@
 import "./globals.css";
 import PWARegister from "./pwa-register";
+import VersionSync from "./version-sync";
 
 export const metadata = {
   title: "Balıkesir Sistem İşletme",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="tr">
       <body>
         <PWARegister />
+        <VersionSync />
         {children}
       </body>
     </html>
