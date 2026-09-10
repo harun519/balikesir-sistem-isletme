@@ -12,9 +12,10 @@ export default function Home(){return <main className="portal">
     :global(html),:global(body){margin:0;width:100%;height:100%;background:#071426;overflow:hidden}
     .portal{width:100vw;height:100dvh;background:#071426;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .stage{position:relative;width:min(100vw,177.7778vh);height:min(100dvh,56.25vw);aspect-ratio:16/9;flex:none;background:#071426}
-    .portalImage{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;user-select:none;-webkit-user-drag:none}
-    .hit{position:absolute;z-index:5;top:31.5%;height:38%;border-radius:18px;background:transparent;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent;outline:none}
-    .hit:hover,.hit:focus,.hit:active{background:rgba(255,255,255,.025);outline:none}
+    .portalImage{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;user-select:none;-webkit-user-drag:none;pointer-events:none}
+    .hit{position:absolute;z-index:5;top:31.5%;height:38%;border:0!important;border-radius:0!important;background:transparent!important;background-color:transparent!important;box-shadow:none!important;opacity:1!important;cursor:pointer;text-decoration:none!important;-webkit-tap-highlight-color:transparent!important;outline:0!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:none!important}
+    .hit:hover,.hit:focus,.hit:focus-visible,.hit:active,.hit:visited{background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;opacity:1!important;transform:none!important}
+    .hit::before,.hit::after{display:none!important;content:none!important}
     .trafo{left:13.5%;width:18.8%}
     .scada{left:33.1%;width:18.8%}
     .teyit{left:52.7%;width:18.8%}
