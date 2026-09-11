@@ -8,45 +8,18 @@ const apps=[
 
 export default function Home(){return <main className="portal">
   <div className="content">
-    <header>
-      <div className="eyebrow">BALIKESİR</div>
-      <h1>SİSTEM İŞLETME</h1>
-      <p>Daha güvenli, daha kesintisiz bir enerji için...</p>
-    </header>
-
+    <header><div className="eyebrow">BALIKESİR</div><h1>SİSTEM İŞLETME</h1><p>Daha güvenli, daha kesintisiz bir enerji için...</p></header>
     <section className="grid">
-      {apps.map(a=><a key={a.key} className={`card ${a.tone}`} href={a.href} target="_blank" rel="noopener noreferrer">
-        <div className="icon">{a.icon}</div>
-        <h2>{a.title}</h2>
-        <p>{a.desc}</p>
-        <div className="btn">Uygulamaya Git →</div>
-      </a>)}
-      <article className="card orange disabled">
-        <div className="icon">🛠️</div>
-        <h2>3. Seviye Bakım</h2>
-        <p>3. seviye bakım faaliyetleri, kontroller ve raporlar</p>
-        <div className="btn">Yakında</div>
-      </article>
+      {apps.map(a=><a key={a.key} className={`card ${a.tone}`} href={a.href} target="_blank" rel="noopener noreferrer"><div className="icon">{a.icon}</div><h2>{a.title}</h2><p>{a.desc}</p><div className="btn">Uygulamaya Git →</div></a>)}
+      <article className="card orange disabled"><div className="icon">🛠️</div><h2>3. Seviye Bakım</h2><p>3. seviye bakım faaliyetleri, kontroller ve raporlar</p><div className="btn">Yakında</div></article>
     </section>
-
-    <section className="bottom">
-      <div className="status"><div className="check">✓</div><div><h3>Tüm Sistemler Aktif</h3><p>Saha operasyonları normal seyrinde.</p></div></div>
-      <div className="duyuru"><h3>🔔 Son Duyurular</h3><p>Şu anda aktif bir duyuru bulunmamaktadır.</p></div>
-    </section>
+    <section className="bottom"><div className="status"><div className="check">✓</div><div><h3>Tüm Sistemler Aktif</h3><p>Saha operasyonları normal seyrinde.</p></div></div><div className="duyuru"><h3>🔔 Son Duyurular</h3><p>Şu anda aktif bir duyuru bulunmamaktadır.</p></div></section>
     <footer>Balıkesir Sistem İşletme Portalı</footer>
   </div>
-
   <style jsx>{`
-    :global(*){box-sizing:border-box}
-    :global(html),:global(body){margin:0;min-width:320px;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#071426}
-    :global(body){overflow-x:hidden}
-    .portal{position:relative;min-height:100dvh;color:#fff;background:
-      linear-gradient(180deg,rgba(3,12,25,.30),rgba(3,12,25,.48)),
-      url('/portal-bg-ai.svg') center center/cover no-repeat fixed;
-      overflow:hidden}
-    .portal:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(4,18,34,.12),rgba(4,18,34,.02) 45%,rgba(4,18,34,.16));z-index:0}
-    .content{position:relative;z-index:1;width:min(1220px,calc(100% - 40px));min-height:100dvh;margin:auto;padding:42px 0 22px;display:flex;flex-direction:column;justify-content:center}
-    header{text-align:center;margin-bottom:28px;text-shadow:0 3px 16px rgba(0,0,0,.5)}.eyebrow{font-size:14px;font-weight:900;letter-spacing:7px;color:#e5edf7}h1{margin:7px 0 8px;font-size:clamp(42px,4.7vw,64px);line-height:.95;font-weight:900}.header p,header p{margin:0;font-size:14px;color:#edf4fb}
+    :global(*){box-sizing:border-box}:global(html),:global(body){margin:0;min-width:320px;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#071426}:global(body){overflow-x:hidden}
+    .portal{position:relative;min-height:100dvh;color:#fff;background-image:linear-gradient(180deg,rgba(3,12,25,.20),rgba(3,12,25,.38)),url('/portal-bg-ai.jpg');background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;overflow:hidden}
+    .portal:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(4,18,34,.08),rgba(4,18,34,0) 45%,rgba(4,18,34,.10));z-index:0}.content{position:relative;z-index:1;width:min(1220px,calc(100% - 40px));min-height:100dvh;margin:auto;padding:42px 0 22px;display:flex;flex-direction:column;justify-content:center}header{text-align:center;margin-bottom:28px;text-shadow:0 3px 16px rgba(0,0,0,.5)}.eyebrow{font-size:14px;font-weight:900;letter-spacing:7px;color:#e5edf7}h1{margin:7px 0 8px;font-size:clamp(42px,4.7vw,64px);line-height:.95;font-weight:900}header p{margin:0;font-size:14px;color:#edf4fb}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{min-height:320px;padding:28px 22px 20px;border:1px solid rgba(154,184,215,.22);border-radius:22px;background:linear-gradient(180deg,rgba(21,42,67,.94),rgba(7,22,39,.97));box-shadow:0 18px 45px rgba(0,0,0,.32);color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;transform:scale(1);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.card:not(.disabled):hover{transform:translateY(-7px) scale(1.035);box-shadow:0 28px 60px rgba(0,0,0,.42);border-color:rgba(255,255,255,.42);z-index:3}.icon{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-size:31px;margin-bottom:22px;box-shadow:0 10px 24px rgba(0,0,0,.24)}.card h2{margin:0;min-height:50px;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:900}.card p{margin:14px 0 20px;font-size:12px;line-height:1.55;color:#cbd8e7}.btn{width:100%;height:45px;margin-top:auto;border-radius:11px;display:grid;place-items:center;font-size:13px;font-weight:900;transition:filter .18s ease}.card:not(.disabled):hover .btn{filter:brightness(1.08)}.blue .icon,.blue .btn{background:#0b82ff}.blue .icon{color:#ffd43b}.green .icon,.green .btn{background:#10bf8a}.purple .icon,.purple .btn{background:linear-gradient(135deg,#7930ff,#aa00ef)}.orange .icon,.orange .btn{background:linear-gradient(135deg,#ff7100,#c44b00)}.disabled{opacity:.8;cursor:default}
     .bottom{width:min(820px,100%);margin:18px auto 0;display:grid;grid-template-columns:1fr 1.15fr;border:1px solid rgba(154,184,215,.18);border-radius:18px;background:linear-gradient(180deg,rgba(20,39,61,.94),rgba(7,20,35,.97));box-shadow:0 16px 38px rgba(0,0,0,.30);overflow:hidden}.status,.duyuru{min-height:105px;padding:20px 22px;display:flex;align-items:center}.status{gap:17px;border-right:1px solid rgba(255,255,255,.07)}.check{width:56px;height:56px;flex:0 0 56px;border-radius:50%;display:grid;place-items:center;background:#10bf8a;font-size:34px;font-weight:900}.status h3,.duyuru h3{margin:0 0 7px;font-size:15px}.status p,.duyuru p{margin:0;font-size:11px;color:#cbd8e7}.duyuru{display:block;padding-top:26px}footer{text-align:center;padding-top:14px;font-size:9px;color:#d6e2ef;text-shadow:0 2px 8px rgba(0,0,0,.55)}
     @media(max-width:1050px){.content{width:min(950px,calc(100% - 26px));padding-top:28px}.grid{gap:10px}.card{min-height:278px;padding:20px 12px 16px}.card h2{font-size:17px}.card p{font-size:10.5px}.icon{width:56px;height:56px;font-size:26px;margin-bottom:15px}.bottom{width:min(710px,100%)}}
