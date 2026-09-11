@@ -1,41 +1,51 @@
 "use client";
 
-export default function Home(){return <main className="portal">
-  <div className="stage">
-    <img className="portalImage" src="/portal-final-kompakt-clean.jpg" alt="Balıkesir Sistem İşletme Portalı" />
+const apps=[
+ {key:"trafo",title:"Trafo Değişimi",desc:"Trafo değişim kayıtları, raporlar ve arşiv",href:"https://balikesir-trafo-degisimi.vercel.app",icon:"⚡",tone:"blue"},
+ {key:"scada",title:"SCADA Saha Kontrol",desc:"SCADA istasyon kontrolü, uygunsuzluklar ve raporlar",href:"https://scada-saha-kontrol-vercel.vercel.app",icon:"🖥️",tone:"green"},
+ {key:"teyit",title:"Görüntülü Teyit",desc:"Saha görüntü teyitleri, uygunluk kontrolleri ve raporlar",href:"https://goruntulu-teyit-v1.vercel.app",icon:"🎥",tone:"purple"}
+] as const;
 
-    <a className="cardHit trafo" href="https://balikesir-trafo-degisimi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Trafo Değişimi">
-      <span className="hoverButton blueBtn">Uygulamaya Git →</span>
-    </a>
-    <a className="cardHit scada" href="https://scada-saha-kontrol-vercel.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="SCADA Saha Kontrol">
-      <span className="hoverButton greenBtn">Uygulamaya Git →</span>
-    </a>
-    <a className="cardHit teyit" href="https://goruntulu-teyit-v1.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Görüntülü Teyit">
-      <span className="hoverButton purpleBtn">Uygulamaya Git →</span>
-    </a>
+export default function Home(){return <main className="portal">
+  <div className="content">
+    <header>
+      <div className="eyebrow">BALIKESİR</div>
+      <h1>SİSTEM İŞLETME</h1>
+      <p>Daha güvenli, daha kesintisiz bir enerji için...</p>
+    </header>
+
+    <section className="grid">
+      {apps.map(a=><a key={a.key} className={`card ${a.tone}`} href={a.href} target="_blank" rel="noopener noreferrer">
+        <div className="icon">{a.icon}</div>
+        <h2>{a.title}</h2>
+        <p>{a.desc}</p>
+        <div className="btn">Uygulamaya Git →</div>
+      </a>)}
+      <article className="card orange disabled">
+        <div className="icon">🛠️</div>
+        <h2>3. Seviye Bakım</h2>
+        <p>3. seviye bakım faaliyetleri, kontroller ve raporlar</p>
+        <div className="btn">Yakında</div>
+      </article>
+    </section>
+
+    <section className="bottom">
+      <div className="status"><div className="check">✓</div><div><h3>Tüm Sistemler Aktif</h3><p>Saha operasyonları normal seyrinde.</p></div></div>
+      <div className="duyuru"><h3>🔔 Son Duyurular</h3><p>Şu anda aktif bir duyuru bulunmamaktadır.</p></div>
+    </section>
+    <footer>Balıkesir Sistem İşletme Portalı</footer>
   </div>
 
   <style jsx>{`
     :global(*){box-sizing:border-box}
-    :global(html),:global(body){margin:0;width:100%;height:100%;background:#071426;overflow:hidden}
-    .portal{width:100vw;height:100dvh;background:#071426;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .stage{position:relative;width:min(100vw,177.7778vh);height:min(100dvh,56.25vw);aspect-ratio:16/9;flex:none;background:#071426}
-    .portalImage{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;user-select:none;-webkit-user-drag:none;pointer-events:none}
-
-    .cardHit{position:absolute;z-index:5;top:31.5%;height:38%;background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;text-decoration:none!important;-webkit-tap-highlight-color:transparent!important}
-    .cardHit:hover,.cardHit:focus,.cardHit:active{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
-    .trafo{left:13.5%;width:18.8%}.scada{left:33.1%;width:18.8%}.teyit{left:52.7%;width:18.8%}
-
-    .hoverButton{position:absolute;left:7.3%;right:7.3%;bottom:7.2%;height:14%;min-height:28px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(8px,.72vw,13px);line-height:1;opacity:0;transform:scale(1);transition:transform .16s ease,opacity .08s ease;pointer-events:none;box-shadow:0 5px 16px rgba(0,0,0,.22)}
-    .cardHit:hover .hoverButton,.cardHit:focus-visible .hoverButton{opacity:1;transform:scale(1.055)}
-    .blueBtn{background:#168cff}.greenBtn{background:#0cc795}.purpleBtn{background:linear-gradient(90deg,#7d2dff,#b000e8)}
-
-    @media(max-width:700px) and (orientation:portrait){
-      :global(html),:global(body){overflow:auto;background:#071426}
-      .portal{min-height:100dvh;height:auto;align-items:flex-start;overflow:auto}
-      .stage{margin-top:18vh;width:100vw;height:56.25vw;aspect-ratio:16/9}
-      .cardHit{top:31%;height:40%}
-      .hoverButton{display:none}
-    }
+    :global(html),:global(body){margin:0;min-width:320px;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#071426}
+    :global(body){overflow-x:hidden}
+    .portal{min-height:100dvh;color:#fff;background:radial-gradient(circle at 50% -10%,#18395f 0%,#0a213b 38%,#061426 72%,#040d18 100%)}
+    .content{width:min(1220px,calc(100% - 40px));min-height:100dvh;margin:auto;padding:42px 0 22px;display:flex;flex-direction:column;justify-content:center}
+    header{text-align:center;margin-bottom:28px}.eyebrow{font-size:14px;font-weight:900;letter-spacing:7px;color:#c8d4e4}h1{margin:7px 0 8px;font-size:clamp(42px,4.7vw,64px);line-height:.95;font-weight:900}.header p,header p{margin:0;font-size:14px;color:#c7d4e3}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{min-height:320px;padding:28px 22px 20px;border:1px solid rgba(154,184,215,.22);border-radius:22px;background:linear-gradient(180deg,rgba(21,42,67,.96),rgba(7,22,39,.98));box-shadow:0 18px 45px rgba(0,0,0,.28);color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;transform:scale(1);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.card:not(.disabled):hover{transform:translateY(-7px) scale(1.035);box-shadow:0 28px 60px rgba(0,0,0,.38);border-color:rgba(255,255,255,.42);z-index:3}.icon{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-size:31px;margin-bottom:22px;box-shadow:0 10px 24px rgba(0,0,0,.24)}.card h2{margin:0;min-height:50px;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:900}.card p{margin:14px 0 20px;font-size:12px;line-height:1.55;color:#cbd8e7}.btn{width:100%;height:45px;margin-top:auto;border-radius:11px;display:grid;place-items:center;font-size:13px;font-weight:900;transition:filter .18s ease}.card:not(.disabled):hover .btn{filter:brightness(1.08)}.blue .icon,.blue .btn{background:#0b82ff}.blue .icon{color:#ffd43b}.green .icon,.green .btn{background:#10bf8a}.purple .icon,.purple .btn{background:linear-gradient(135deg,#7930ff,#aa00ef)}.orange .icon,.orange .btn{background:linear-gradient(135deg,#ff7100,#c44b00)}.disabled{opacity:.8;cursor:default}
+    .bottom{width:min(820px,100%);margin:18px auto 0;display:grid;grid-template-columns:1fr 1.15fr;border:1px solid rgba(154,184,215,.18);border-radius:18px;background:linear-gradient(180deg,rgba(20,39,61,.96),rgba(7,20,35,.98));box-shadow:0 16px 38px rgba(0,0,0,.24);overflow:hidden}.status,.duyuru{min-height:105px;padding:20px 22px;display:flex;align-items:center}.status{gap:17px;border-right:1px solid rgba(255,255,255,.07)}.check{width:56px;height:56px;flex:0 0 56px;border-radius:50%;display:grid;place-items:center;background:#10bf8a;font-size:34px;font-weight:900}.status h3,.duyuru h3{margin:0 0 7px;font-size:15px}.status p,.duyuru p{margin:0;font-size:11px;color:#cbd8e7}.duyuru{display:block;padding-top:26px}footer{text-align:center;padding-top:14px;font-size:9px;color:#8092a7}
+    @media(max-width:1050px){.content{width:min(950px,calc(100% - 26px));padding-top:28px}.grid{gap:10px}.card{min-height:278px;padding:20px 12px 16px}.card h2{font-size:17px}.card p{font-size:10.5px}.icon{width:56px;height:56px;font-size:26px;margin-bottom:15px}.bottom{width:min(710px,100%)}}
+    @media(max-width:700px){.content{width:100%;padding:24px 10px 20px;justify-content:flex-start}header{margin-bottom:18px}.eyebrow{font-size:10px;letter-spacing:4px}h1{font-size:31px}header p{font-size:10.5px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{min-height:236px;padding:14px 8px 10px;border-radius:15px}.card:not(.disabled):hover{transform:none}.icon{width:46px;height:46px;font-size:22px;margin-bottom:10px}.card h2{min-height:38px;font-size:13px}.card p{font-size:9.3px;margin:9px 0 10px}.btn{height:34px;font-size:9.8px}.bottom{grid-template-columns:1fr;gap:0;margin-top:9px}.status{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.status,.duyuru{min-height:82px;padding:13px 16px}.check{width:44px;height:44px;flex-basis:44px;font-size:25px}.status h3,.duyuru h3{font-size:12.5px}.status p,.duyuru p{font-size:9.5px}.duyuru{padding-top:15px}footer{font-size:8.5px}}
   `}</style>
- </main>}
+</main>}
