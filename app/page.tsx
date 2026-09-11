@@ -42,7 +42,7 @@ export default function Home(){return <main className="portal">
     :global(body){overflow-x:hidden}
     .portal{position:relative;min-height:100dvh;color:#fff;background:
       linear-gradient(180deg,rgba(3,12,25,.30),rgba(3,12,25,.48)),
-      url('https://cdn.prod.website-files.com/6762f667855815f0a9f2592f/698de7fb37817341c318a40e_Substation.jpg') center center/cover no-repeat fixed;
+      url('/portal-bg-ai.svg') center center/cover no-repeat fixed;
       overflow:hidden}
     .portal:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(4,18,34,.12),rgba(4,18,34,.02) 45%,rgba(4,18,34,.16));z-index:0}
     .content{position:relative;z-index:1;width:min(1220px,calc(100% - 40px));min-height:100dvh;margin:auto;padding:42px 0 22px;display:flex;flex-direction:column;justify-content:center}
