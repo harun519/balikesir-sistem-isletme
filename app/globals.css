@@ -22,3 +22,33 @@ body {
 button {
   font: inherit;
 }
+
+/* Acil Kurtarma Merkezi: kart kapalıyken yalnızca başlık + son yedek */
+@media (max-width: 800px) {
+  main.page .grid .card:not(.selected) .row:nth-of-type(1),
+  main.page .grid .card:not(.selected) .row:nth-of-type(2),
+  main.page .grid .card:not(.selected) .row:nth-of-type(4),
+  main.page .grid .card:not(.selected) .row:nth-of-type(5),
+  main.page .grid .card:not(.selected) .err {
+    display: none !important;
+  }
+
+  main.page .grid .card:not(.selected) {
+    padding: 10px 11px !important;
+  }
+
+  main.page .grid .card:not(.selected) .cardHead {
+    margin-bottom: 5px !important;
+  }
+
+  main.page .grid .card:not(.selected) .row:nth-of-type(3) {
+    padding: 7px 0 !important;
+    border-top: 1px solid #ffffff0e !important;
+  }
+
+  main.page .grid .card:not(.selected) .tap {
+    margin-top: 6px !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+  }
+}
