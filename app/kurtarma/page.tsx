@@ -31,16 +31,16 @@ const meta={
 export default function Kurtarma(){
  const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [session,setSession]=useState<Session|null>(null);
  const [busy,setBusy]=useState(false);const [msg,setMsg]=useState("");const [loading,setLoading]=useState(false);const [systems,setSystems]=useState<Systems>({});
- const [selected,setSelected]=useState<Key|null>(null);const [backups,setBackups]=useState<Partial<Record<Key,Backup[]>>>({});const [backupLoading,setBackupLoading]=useState<Key|null>(null);const [restoreBusy,setRestoreBusy]=useState("");const [success,setSuccess]=useState("");
+ const [selected,setSelected]=useState<Key|null>(null);const [backups,setBackups]=useState<Partial<Record<Key,Backup[]>>>({});const [backupErrors,setBackupErrors]=useState<Partial<Record<Key,string>>>({});const [backupLoading,setBackupLoading]=useState<Key|null>(null);const [restoreBusy,setRestoreBusy]=useState("");const [success,setSuccess]=useState("");
 
  async function load(){setLoading(true);try{const r=await fetch("/api/kurtarma-durum",{cache:"no-store"});const d=await r.json();setSystems(d.systems||{});setMsg("")}catch{setMsg("Servis bilgileri alınamadı.")}finally{setLoading(false)}}
  useEffect(()=>{if(session)void load()},[session]);
 
  async function connect(e:FormEvent){e.preventDefault();setBusy(true);setMsg("");try{const s=await loginAdmin(email.trim(),password);setSession(s);setPassword("")}catch(err:any){setMsg(err?.message||"Giriş başarısız.")}finally{setBusy(false)}}
  async function listBackups(key:Key){
-   if(!session)return;setBackupLoading(key);setMsg("");setSuccess("");
+   if(!session)return;setBackupLoading(key);setMsg("");setSuccess("");setBackupErrors(x=>({...x,[key]:""}));
    try{const r=await fetch(`/api/kurtarma-yedek?app=${key}`,{headers:{Authorization:`Bearer ${session.token}`},cache:"no-store"});const d=await r.json();if(!r.ok)throw new Error(d?.error||"Yedekler alınamadı.");setBackups(x=>({...x,[key]:d.backups||[]}))}
-   catch(err:any){setMsg(err?.message||"Yedekler alınamadı.")}finally{setBackupLoading(null)}
+   catch(err:any){const error=err?.message||"Yedekler alınamadı.";setBackupErrors(x=>({...x,[key]:error}));setMsg(error)}finally{setBackupLoading(null)}
  }
  async function choose(key:Key){if(selected===key){setSelected(null);return}setSelected(key);await listBackups(key)}
  async function restore(key:Key,b:Backup){
@@ -72,7 +72,7 @@ export default function Kurtarma(){
      <div className="detailHead"><span className="detailIcon">{sel.icon}</span><div><h2>{sel.name}</h2><p>Sunucudaki geri yüklenebilir yedekler</p></div></div>
      <div className="detailActions"><a href={sel.url} target="_blank" rel="noreferrer">Uygulamayı Aç</a><button onClick={()=>void listBackups(sel.key)} disabled={backupLoading===sel.key}>{backupLoading===sel.key?"Yükleniyor...":"↻ Yedekleri Yenile"}</button></div>
      <div className="warning"><b>Güvenli geri yükleme</b><span>Seçilen yedek yazılmadan önce uygulamanın mevcut verisi otomatik olarak GÜVENLİK/SAFETY yedeğine alınır. Bu adım başarısız olursa geri yükleme başlamaz.</span></div>
-     <div className="backupList">{backupLoading===sel.key&&!selectedBackups.length?<div className="empty">Yedekler yükleniyor…</div>:selectedBackups.length?selectedBackups.map(b=><article className="backup" key={b.path}><div><b>{b.name}</b><span>{fmt(b.created_at||b.updated_at)} · {bytes(b.size)}</span><small>{b.path}</small></div><button disabled={!!restoreBusy} onClick={()=>void restore(sel.key,b)}>{restoreBusy===b.path?"Güvenlik yedeği alınıyor…":"Bu Yedeği Geri Yükle"}</button></article>):<div className="empty">Geri yüklenebilir yedek bulunamadı.</div>}</div>
+     <div className="backupList">{backupLoading===sel.key&&!selectedBackups.length?<div className="empty">Yedekler yükleniyor…</div>:backupErrors[sel.key]?<div className="empty">{backupErrors[sel.key]}</div>:selectedBackups.length?selectedBackups.map(b=><article className="backup" key={b.path}><div><b>{b.name}</b><span>{fmt(b.created_at||b.updated_at)} · {bytes(b.size)}</span><small>{b.path}</small></div><button disabled={!!restoreBusy} onClick={()=>void restore(sel.key,b)}>{restoreBusy===b.path?"Güvenlik yedeği alınıyor…":"Bu Yedeği Geri Yükle"}</button></article>):<div className="empty">Geri yüklenebilir yedek bulunamadı.</div>}</div>
    </section>}
    <div className="note"><b>Güvenlik:</b> Yedek içerikleri ve service-role anahtarları bu sayfaya gönderilmez. Listeleme ve geri yükleme yalnızca portalın server-side route’u üzerinden, admin rolü yeniden doğrulanarak yapılır.</div>
  </div><style>{styles}</style></main>
