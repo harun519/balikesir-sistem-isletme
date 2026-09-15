@@ -49,7 +49,7 @@ export default function Kullanicilar(){
    if(!sharedToken&&!teyitToken&&notes.every(x=>x.includes(":")))setError(notes.join(" · "));else setMsg(notes.join(" · "));
   }finally{setBusy("");setAdminPassword("")}
  }
- async function connectCrm(e:FormEvent){e.preventDefault();setBusy("crmconnect");setMsg("");setError("");try{const d=await crmCall("users:list");setCrmUsers(d.users||[]);setCrmConnected(true);setMsg("CRM yönetici bağlantısı kuruldu.")}catch(err:any){setCrmConnected(false);setError(err?.message||"CRM bağlantısı kurulamadı.")}finally{setBusy("");setCrmPassword("")}}
+ async function connectCrm(e:FormEvent){e.preventDefault();setBusy("crmconnect");setMsg("");setError("");try{const d=await crmCall("users:list");setCrmUsers(d.users||[]);setCrmConnected(true);setMsg("CRM yönetici bağlantısı kuruldu.")}catch(err:any){setCrmConnected(false);setError(err?.message||"CRM bağlantısı kurulamadı.")}finally{setBusy("")}}
 
  async function createCentral(e:FormEvent){
   e.preventDefault();setBusy("create");setMsg("");setError("");
