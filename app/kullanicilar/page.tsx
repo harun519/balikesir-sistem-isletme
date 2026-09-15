@@ -55,26 +55,23 @@ export default function Kullanicilar(){
   e.preventDefault();setBusy("create");setMsg("");setError("");
   const email=form.email.trim().toLowerCase(),username=form.username.trim();
   if(!email||!username||form.password.length<6){setBusy("");setError("Kullanıcı adı, geçerli e-posta ve en az 6 karakterli şifre gerekli.");return}
-  if([form.trafo,form.scada,form.teyit,form.crm].every(x=>x==="none")){setBusy("");setError("En az bir uygulama için yetki seçmelisin.");return}
   const ok:string[]=[],fail:string[]=[];
   try{
-   if(form.trafo!=="none"||form.scada!=="none"){
-    if(!sharedToken)fail.push("Trafo/SCADA yönetici bağlantısı yok");
-    else try{const d=await portalCall("shared",sharedToken,{action:"save",email,password:form.password,trafoRole:form.trafo==="none"?null:form.trafo,scadaRole:form.scada==="none"?null:form.scada});setSharedUsers(d.users||[]);ok.push("Trafo/SCADA")}catch(err:any){fail.push(`Trafo/SCADA: ${err.message}`)}
-   }
-   if(form.teyit!=="none"){
-    if(!teyitToken)fail.push("Görüntülü Teyit yönetici bağlantısı yok");
-    else try{const d=await portalCall("teyit",teyitToken,{action:"save",email,password:form.password,role:form.teyit});setTeyitUsers(d.users||[]);ok.push("Görüntülü Teyit")}catch(err:any){fail.push(`Görüntülü Teyit: ${err.message}`)}
-   }
-   if(form.crm!=="none"){
-    if(!crmConnected)fail.push("CRM yönetici bağlantısı yok");
-    else try{
+   if(sharedToken){
+    try{const d=await portalCall("shared",sharedToken,{action:"save",email,password:form.password,trafoRole:form.trafo==="none"?null:form.trafo,scadaRole:form.scada==="none"?null:form.scada});setSharedUsers(d.users||[]);ok.push("Trafo/SCADA")}catch(err:any){fail.push(`Trafo/SCADA: ${err.message}`)}
+   }else if(form.trafo!=="none"||form.scada!=="none")fail.push("Trafo/SCADA yönetici bağlantısı yok");
+   if(teyitToken){
+    try{const d=await portalCall("teyit",teyitToken,{action:"save",email,password:form.password,role:form.teyit==="none"?null:form.teyit});setTeyitUsers(d.users||[]);ok.push("Görüntülü Teyit")}catch(err:any){fail.push(`Görüntülü Teyit: ${err.message}`)}
+   }else if(form.teyit!=="none")fail.push("Görüntülü Teyit yönetici bağlantısı yok");
+   if(crmConnected){
+    try{
      const list=await crmCall("users:list");const existing=(list.users||[]).find((u:CrmUser)=>u.email?.toLowerCase()===email||u.username.toLowerCase()===username.toLowerCase());
-     if(existing)await crmCall("users:update",{id:existing.id,username,email,password:form.password,role:form.crm,active:true});
+     if(form.crm==="none"){if(existing)await crmCall("users:update",{id:existing.id,active:false})}
+     else if(existing)await crmCall("users:update",{id:existing.id,username,email,password:form.password,role:form.crm,active:true});
      else await crmCall("users:create",{username,email,password:form.password,role:form.crm});
      await refreshCrm();ok.push("CRM");
     }catch(err:any){fail.push(`CRM: ${err.message}`)}
-   }
+   }else if(form.crm!=="none")fail.push("CRM yönetici bağlantısı yok");
    if(ok.length)setMsg(`${username} oluşturuldu/güncellendi: ${ok.join(", ")}.`);
    if(fail.length)setError(fail.join(" · "));
    if(ok.length&&!fail.length)setForm({username:"",email:"",password:"",trafo:"viewer",scada:"viewer",teyit:"viewer",crm:"viewer"});
