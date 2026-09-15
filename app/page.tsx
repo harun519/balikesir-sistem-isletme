@@ -14,7 +14,7 @@ export default function Home(){return <main className="portal">
     <section className="grid">
       {apps.map(a=><a key={a.key} className={`card ${a.tone}`} href={a.href} target="_blank" rel="noopener noreferrer"><div className="icon">{a.icon}</div><h2>{a.title}</h2><p>{a.desc}</p><div className="btn">Uygulamaya Git →</div></a>)}
       <article className="card orange disabled"><div className="icon">🛠️</div><h2>3. Seviye Bakım</h2><p>3. seviye bakım faaliyetleri, kontroller ve raporlar</p><div className="btn">Yakında</div></article>
-      <a className="card cyan" href="/crm-evrak" target="_blank" rel="noopener noreferrer"><div className="icon">🗂️</div><h2>CRM Evrak Takibi</h2><p>CRM evrakları, kayıt takibi ve dijital arşiv yönetimi</p><div className="btn">Uygulamaya Git →</div></a>
+      <a className="card cyan" href="https://crm-evrak-takip.vercel.app" target="_blank" rel="noopener noreferrer"><div className="icon">🗂️</div><h2>CRM Evrak Takibi</h2><p>CRM evrakları, kayıt takibi ve dijital arşiv yönetimi</p><div className="btn">Uygulamaya Git →</div></a>
     </section>
     <section className="bottom">
       <a className="status statusLink" href="/saglik"><div className="check">✓</div><div><h3>Sistem Sağlığı</h3><p>Canlı bağlantı, veri ve yedek durumunu görüntüle →</p></div></a>
