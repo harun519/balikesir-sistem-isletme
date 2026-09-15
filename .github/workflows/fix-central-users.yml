@@ -1,0 +1,27 @@
+name: Fix Central Users
+on:
+  push:
+    paths:
+      - .github/workflows/fix-central-users.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('app/kullanicilar/page.tsx')
+          s=p.read_text(encoding='utf-8')
+          old='finally{setBusy("");setCrmPassword("")}}'
+          if old not in s: raise SystemExit('target not found')
+          p.write_text(s.replace(old,'finally{setBusy("")}}'),encoding='utf-8')
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/kullanicilar/page.tsx
+          git commit -m "Keep CRM admin credential only in page memory"
+          git push
