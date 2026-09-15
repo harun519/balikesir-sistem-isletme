@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 
 export const dynamic="force-dynamic";
 
-type Payload={ok?:boolean;database?:boolean;lastDataAt?:string|null;lastBackupAt?:string|null;lastBackupName?:string|null;latencyMs?:number;checkedAt?:string;error?:string;version?:string};
+type Payload={ok?:boolean;database?:boolean;blob?:boolean;lastDataAt?:string|null;lastFileAt?:string|null;lastBackupAt?:string|null;lastBackupName?:string|null;latencyMs?:number;checkedAt?:string;error?:string;version?:string};
 
 async function read(url:string){
   const started=Date.now();
@@ -17,10 +17,11 @@ async function read(url:string){
 }
 
 export async function GET(){
-  const [trafo,scada,teyit]=await Promise.all([
+  const [trafo,scada,teyit,crm]=await Promise.all([
     read("https://balikesir-trafo-degisimi.vercel.app/api/health"),
     read("https://scada-saha-kontrol-vercel.vercel.app/api/health"),
-    read("https://goruntulu-teyit-v1.vercel.app/api/version")
+    read("https://goruntulu-teyit-v1.vercel.app/api/version"),
+    read("https://crm-evrak-takip.vercel.app/api/portal-health")
   ]);
-  return NextResponse.json({ok:true,checkedAt:new Date().toISOString(),systems:{trafo,scada,teyit}},{headers:{"Cache-Control":"no-store"}})
+  return NextResponse.json({ok:true,checkedAt:new Date().toISOString(),systems:{trafo,scada,teyit,crm}},{headers:{"Cache-Control":"no-store"}})
 }
