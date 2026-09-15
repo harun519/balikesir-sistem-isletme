@@ -1,6 +1,7 @@
 import "./globals.css";
 import PWARegister from "./pwa-register";
 import VersionSync from "./version-sync";
+import CrmFileWidget from "./crm-file-widget";
 
 export const metadata = {
   title: "Balıkesir Sistem İşletme",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <PWARegister />
         <VersionSync />
+        <CrmFileWidget />
         {children}
       </body>
     </html>
