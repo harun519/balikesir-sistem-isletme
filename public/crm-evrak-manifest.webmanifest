@@ -1,0 +1,18 @@
+{
+  "name": "CRM Evrak Takibi",
+  "short_name": "CRM Evrak",
+  "description": "CRM voltaj düşüklüğü evrak ve kayıt yönetimi",
+  "start_url": "/crm-evrak",
+  "scope": "/crm-evrak",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#0e7490",
+  "icons": [
+    {
+      "src": "/crm-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
