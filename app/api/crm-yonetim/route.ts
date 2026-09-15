@@ -41,6 +41,8 @@ export async function POST(req:NextRequest){
   if(action==="users:delete")return NextResponse.json(await callCrm(cookie,"/api/crm-users",{method:"DELETE",body:JSON.stringify(body.payload||{})}),{headers:{"Cache-Control":"no-store"}});
   if(action==="recovery:status")return NextResponse.json(await callCrm(cookie,"/api/crm-recovery"),{headers:{"Cache-Control":"no-store"}});
   if(action==="recovery:download")return NextResponse.json({ok:true,backup:await callCrm(cookie,"/api/crm-recovery?download=1")},{headers:{"Cache-Control":"no-store"}});
+  if(action==="recovery:create")return NextResponse.json(await callCrm(cookie,"/api/crm-recovery",{method:"POST",body:JSON.stringify({action:"create"})}),{headers:{"Cache-Control":"no-store"}});
+  if(action==="recovery:restore-stored")return NextResponse.json(await callCrm(cookie,"/api/crm-recovery",{method:"POST",body:JSON.stringify({action:"restore-stored",backupId:body?.payload?.backupId})}),{headers:{"Cache-Control":"no-store"}});
   if(action==="recovery:restore")return NextResponse.json(await callCrm(cookie,"/api/crm-recovery",{method:"POST",body:JSON.stringify(body.payload||{})}),{headers:{"Cache-Control":"no-store"}});
   return fail("Desteklenmeyen CRM yönetim işlemi.");
  }catch(error:any){return fail(error?.message||"CRM yönetim işlemi başarısız.",Number(error?.status)||500)}
