@@ -38,7 +38,7 @@ export async function GET(req:Request){
   const rows=documentId
     ? await sql`SELECT id,document_id,crm_no,file_name,content_type,file_size,created_at FROM crm_files WHERE document_id=${documentId} ORDER BY created_at DESC`
     : await sql`SELECT id,document_id,crm_no,file_name,content_type,file_size,created_at FROM crm_files ORDER BY created_at DESC LIMIT 250`;
-  return NextResponse.json({ok:true,files:rows.map((r:any)=>({
+  return NextResponse.json({ok:true,blobReady:!!process.env.BLOB_READ_WRITE_TOKEN,files:rows.map((r:any)=>({
     id:r.id,documentId:r.document_id,crmNo:r.crm_no,fileName:r.file_name,contentType:r.content_type,
     size:Number(r.file_size||0),createdAt:r.created_at?.toISOString?.()||String(r.created_at||"")
   }))});
