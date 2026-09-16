@@ -1,1 +1,0 @@
-Neon database connected for CRM Evrak Takip.
