@@ -11,7 +11,7 @@ async function ping(url:string):Promise<Check>{
 const systems=[
  {key:"trafo",name:"Trafo Değişimi",icon:"⚡",url:"https://balikesir-trafo-degisimi.vercel.app",health:"https://balikesir-trafo-degisimi.vercel.app/api/health",backup:"Ayın 1 ve 15’i • 08:30",tone:"#2563eb"},
  {key:"scada",name:"SCADA Saha Kontrol",icon:"🖥️",url:"https://scada-saha-kontrol-vercel.vercel.app",health:"https://scada-saha-kontrol-vercel.vercel.app/api/health",backup:"Ayın 1 ve 15’i • 03:00",tone:"#10b981"},
- {key:"teyit",name:"Görüntülü Teyit",icon:"🎥",url:"https://goruntulu-teyit-v1.vercel.app",health:"https://goruntulu-teyit-v1.vercel.app/api/version",backup:"Her gün 03:00",tone:"#7c3aed"}
+ {key:"teyit",name:"Görüntülü Teyit",icon:"🎥",url:"https://goruntulu-teyit-v1.vercel.app",health:"https://goruntulu-teyit-v1.vercel.app/api/version",backup:"Ayın 1 ve 15’i • 03:00",tone:"#7c3aed"}
 ] as const;
 
 function fmtDate(v?:string|null){if(!v)return "Henüz yok";try{return new Date(v).toLocaleString("tr-TR",{timeZone:"Europe/Istanbul"})}catch{return v}}
