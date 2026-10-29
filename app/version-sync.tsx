@@ -19,6 +19,7 @@ export default function VersionSync() {
     let cancelled = false;
 
     async function syncVersions() {
+      if(!document.querySelector('.blueVersion,.greenVersion,.purpleVersion'))return;
       await Promise.all(
         APPS.map(async ({ selector, url }) => {
           try {
@@ -38,7 +39,7 @@ export default function VersionSync() {
     }
 
     syncVersions();
-    const timer = window.setInterval(syncVersions, 5 * 60 * 1000);
+    const timer = window.setInterval(()=>{if(document.visibilityState==="visible")void syncVersions();}, 15 * 60 * 1000);
     return () => {
       cancelled = true;
       window.clearInterval(timer);
@@ -47,3 +48,4 @@ export default function VersionSync() {
 
   return null;
 }
+
