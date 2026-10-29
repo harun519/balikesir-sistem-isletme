@@ -17,7 +17,6 @@ export default function Home(){return <main className="portal">
       <a className="status statusLink users" href="/kullanicilar"><div className="check usersCheck">👥</div><div><h3>Kullanıcı Yönetimi</h3><p>Trafo, SCADA ve Teyit yetkilerini yönet →</p></div></a>
       <a className="status statusLink recovery" href="/kurtarma"><div className="check recoveryCheck">🛟</div><div><h3>Acil Kurtarma</h3><p>Uygulama ve kurtarma durumunu görüntüle →</p></div></a>
     </section>
-    <section className="portalTools"><a href="/duyurular">📣 Duyurular →</a></section>
     <footer>Balıkesir Sistem İşletme Portalı</footer>
   </div>
   <style jsx>{`
