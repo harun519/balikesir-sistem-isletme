@@ -1,5 +1,5 @@
-const CACHE='balikesir-portal-v2-private-safe';
-const CORE=['/','/manifest.webmanifest','/icon-192.png','/icon-512.png'];
+const CACHE='balikesir-portal-v3-distinct-icon';
+const CORE=['/','/manifest.webmanifest','/icon.svg','/icon-192.png','/icon-512.png','/apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(async c=>{for(const u of CORE){try{const r=await fetch(u,{cache:'reload'});if(r.ok)await c.put(u,r)}catch{}}}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('balikesir-portal-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);if(r.method!=='GET'||u.origin!==self.location.origin||u.pathname.startsWith('/api/')||r.headers.has('authorization'))return;
