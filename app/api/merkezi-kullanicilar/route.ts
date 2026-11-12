@@ -8,11 +8,11 @@ const endpoints={
  teyit:"https://goruntulu-teyit-v1.vercel.app/api/portal-users",
 } as const;
 type Target=keyof typeof endpoints;
-function target(v:string|null):Target|null{return v&&v in endpoints?v as Target:null}
+function target(v:string|null):Target|null{return v==='shared'||v==='teyit'?v:null}
 function fail(error:string,status=400){return NextResponse.json({ok:false,error},{status,headers:{"Cache-Control":"no-store"}})}
 function bearer(req:NextRequest){const h=req.headers.get("authorization")||"";return h.startsWith("Bearer ")?h:""}
 async function relay(url:string,auth:string,init:RequestInit={}){
- const r=await fetch(url,{...init,cache:"no-store",headers:{Authorization:auth,"Content-Type":"application/json",...(init.headers||{})}});
+ const r=await fetch(url,{...init,cache:"no-store",redirect:"error",headers:{Authorization:auth,"Content-Type":"application/json",...(init.headers||{})}});
  const text=await r.text();let data:any;try{data=JSON.parse(text)}catch{data={raw:text}}
  return NextResponse.json(data,{status:r.status,headers:{"Cache-Control":"no-store"}});
 }
